@@ -1,5 +1,5 @@
 # A docker base image based on Alpine Linux with python 3.7.3 pre-installed
-FROM library/python:3.7.3-alpine
+FROM library/python:3.7.3-slim-stretch
 
 # Meta-information about the image - some keys are commonly used, but anything can go here
 LABEL maintainer="Federico Mestrone"
@@ -9,6 +9,8 @@ LABEL description="A simple container for the GCP Developer Enablement Program"
 # Create the Python virtual environment for our application
 RUN mkdir /opt/myapp
 RUN python3 -m venv venv
+
+RUN apt install language-pack-it-base
 
 # Copy the Python application itself and all files that go with it
 COPY app.py /opt/myapp
