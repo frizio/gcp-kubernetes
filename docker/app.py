@@ -2,7 +2,7 @@ import locale
 from flask import Flask
 from datetime import datetime
 import socket
-
+import requests
 
 locale.setlocale(locale.LC_ALL, 'it_IT')
 app = Flask(__name__)
@@ -15,7 +15,12 @@ def hello_world():
 
 @app.route('/hello/<name>')
 def hello(name):
-    return '<h1>Hello %s!</h1>\n' % name
+    r = requests.get('http://127.0.0.1:5003/user/%s' % name)
+    if r.status_code == 200:
+        user = r.json()
+        return '<h1>Hello %s %s!</h1>\n' % (user['firstname'], user['lastname'])
+    else:
+        return '<h1>Error: %d!</h1>\n' % r.status_code
 
 
 @app.route('/version')

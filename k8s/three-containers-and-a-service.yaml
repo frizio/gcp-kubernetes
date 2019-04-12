@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-k8s-deploy
+  labels:
+    app: gcp-k8s
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gcp-k8s
+  template:
+    metadata:
+      labels:
+        app: gcp-k8s
+    spec:
+      restartPolicy: Always
+      volumes:
+      - name: shared-data
+        emptyDir: {}
+      containers:
+      - name: gcp-k8s-db-1
+        image: gcp-k8s-db:v1
+        volumeMounts:
+        - name: shared-data
+          mountPath: /pod-data
+      - name: gcp-k8s-web-1
+        image: gcp-k8s-web:v1
+      - name: gcp-k8s-api-1
+        image: gcp-k8s-api:v1
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mongo-cfg

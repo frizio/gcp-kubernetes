@@ -24,8 +24,8 @@ RUN cd /opt/myapp && \
 
 # NB Reordering with the common stuff first increases
 # the chances of reusing the same intermediate image
-# layers as the Flask project in the Kubernetes demo
-LABEL description="A simple container for the GCP Developer Enablement Program"
+# layers as the Docker project in the previous demo
+LABEL description="A backend container for the GCP Developer Enablement Program"
 
 # Copy the Python application itself and all files that go with it
 COPY app.py /opt/myapp
@@ -36,4 +36,4 @@ COPY templates/ /opt/myapp/templates
 # This is the standard command used to run a Flask application
 ENTRYPOINT cd /opt/myapp && \
            export FLASK_APP=app.py && \
-           flask run --host 0.0.0.0 --no-reload
+           flask run --host 0.0.0.0 --port 5003 --no-reload

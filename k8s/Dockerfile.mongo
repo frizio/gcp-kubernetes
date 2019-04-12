@@ -1,0 +1,12 @@
+# A docker base image based on Ubuntu Xenial with Mongo 4.0.8 pre-installed
+FROM library/mongo:4.0.8-xenial
+
+# Meta-information about the image - some keys are commonly used, but anything can go here
+LABEL maintainer="Federico Mestrone"
+LABEL version="1.0"
+LABEL description="A Mongo container for the GCP Developer Enablement Program"
+
+# Seed data for MongoDB
+COPY seed-data.js /docker-entrypoint-initdb.d/
+
+RUN if [ -d "/pod-data" ] ; then echo `hostname -i` > /pod-data/hostname ; fi
