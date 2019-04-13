@@ -9,4 +9,4 @@ LABEL description="A Mongo container for the GCP Developer Enablement Program"
 # Seed data for MongoDB
 COPY seed-data.js /docker-entrypoint-initdb.d/
 
-RUN if [ -d "/pod-data" ] ; then echo `hostname -i` > /pod-data/hostname ; fi
+RUN if [ -d "/pod-data" ] ; then echo "mydatabase" > /pod-data/database ; fi
