@@ -6,9 +6,6 @@ LABEL maintainer="Federico Mestrone"
 LABEL version="1.0"
 LABEL description="A Mongo container for the GCP Developer Enablement Program"
 
-ENV MONGO_INITDB_DATABASE mydatabase
-
 # Seed data for MongoDB
+ENV MONGO_INITDB_DATABASE mydatabase
 COPY seed-data.js /docker-entrypoint-initdb.d/
-
-RUN if [ -d "/pod-data" ] ; then echo "mydatabase" > /pod-data/database ; fi

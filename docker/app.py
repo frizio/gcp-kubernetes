@@ -32,5 +32,14 @@ def version():
     return s
 
 
+@app.route('/last')
+def last():
+    try:
+        with open("/api-cfg/last-greeting", "r") as f:
+            return f.read()
+    except:
+        return "<error>"
+
+
 if __name__ == '__main__':
     app.run()

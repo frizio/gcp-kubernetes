@@ -20,14 +20,14 @@ spec:
         emptyDir: {}
       containers:
       - name: gcp-k8s-db-1
-        image: gcp-k8s-db:v1
-        volumeMounts:
-        - name: shared-data
-          mountPath: /pod-data
+        image: db:v1
       - name: gcp-k8s-web-1
-        image: gcp-k8s-web:v1
-      - name: gcp-k8s-api-1
-        image: gcp-k8s-api:v1
+        image: web:v2
         volumeMounts:
         - name: shared-data
-          mountPath: /mongo-cfg
+          mountPath: /api-cfg
+      - name: gcp-k8s-api-1
+        image: api:v3
+        volumeMounts:
+        - name: shared-data
+          mountPath: /web-cfg
